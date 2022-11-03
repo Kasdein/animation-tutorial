@@ -5,7 +5,20 @@ function AllColors(colorArray){
         this.colors = colorArray;
     } else{
         // Here are differnet ways to write colors
-        this.colors = ["white", "#ff69b4", "lightgreen","darkgrey", "rgb(255,255,0)"]
+        this.colors = ["slateBlue", "pink", "crimson", "darkOrange", "gold", "lightGreen", "powderblue",  "dodgerBlue"]
+    }
+
+    this.GrabRandomColor = () => {
+        return this.colors[Math.floor(Math.random() * this.colors.length)]
+    }
+
+    this.AddRandomColor = () => {
+      let red = Math.floor(Math.random() * 255)
+      let green = Math.floor(Math.random() * 255)
+      let blue = Math.floor(Math.random() * 255)
+
+      let colorString = "rgb(" + red + "," + green + "," + blue + ")"
+      this.colors.push(colorString)
     }
 }
 
@@ -56,7 +69,7 @@ function AllColors(colorArray){
       document.body.appendChild(this.table)
     }
   
-    // RemoveTable removes the table from the HTML
+    // RefreshTable removes the table from the HTML
     this.RefreshTable = function(){
       this.table.remove()
       this.DisplayTable()
@@ -66,23 +79,24 @@ function AllColors(colorArray){
       this.tableArray[column][row] = color
     }
   }
-
   
   // Declare our objects
-  let myColors = new AllColors(["blue", "darkblue", "orange", "darkgrey"])
-  let myTable = new Table(4,4)
+  let myColors = new AllColors(["dodgerBlue", "powderblue", "lightGreen", "gold", "darkOrange", "crimson", "pink", "slateBlue"])
+  let myTable = new Table(50,50)
   myTable.FillTableInOrder(myColors)
-  myTable.FillCell(2,2,"black")
+  // myTable.FillCell(2,2,"black")
   myTable.DisplayTable()
 
 
   function RandomiseTableAndDisplay(){
-    myTable.FillCell(Math.floor(Math.random() * 4), Math.floor(Math.random() * 4), "white")
+    myTable.FillCell(Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000), myColors.GrabRandomColor(), myColors.AddRandomColor())
     myTable.RefreshTable()
   }
 
-  
-  setInterval("RandomiseTableAndDisplay()", 500)
+
 
   
+  setInterval("RandomiseTableAndDisplay()", 0)
+
+
   
